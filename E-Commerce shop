@@ -1,0 +1,15 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+products = [{"id": 1, "name": "Laptop", "price": 1000}]
+
+@app.route("/products")
+def get_products():
+    return {"products": products}
+
+@app.route("/buy", methods=["POST"])
+def buy():
+    product_id = request.json["id"]
+    return {"message": f"Bought product {product_id}"}
+
+app.run(debug=True)
